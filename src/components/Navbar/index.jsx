@@ -7,10 +7,10 @@ const Navbar = () => {
   <div className="container">
     <div className="topbar-left">
       <button className="topbar-toggler">☰</button>
-      <a className="topbar-brand" href="index.html">
-        <img className="logo-default" src="assets/img/don.png" alt="logo" />
-        <img className="logo-inverse" src="assets/img/don.png" alt="logo" />
-      </a>
+      <Link className="topbar-brand" to="/">
+        <img className="logo-default" src= {`${process.env.PUBLIC_URL}/assets/img/don.png`} alt="logo" />
+        <img className="logo-inverse" src={`${process.env.PUBLIC_URL}/assets/img/don.png`} alt="logo" />
+      </Link>
     </div>
     <div className="topbar-right">
       <ul className="topbar-nav nav">
@@ -18,7 +18,9 @@ const Navbar = () => {
           <a className="nav-link" href="index.html">Home</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="create-article.html">Write new article</a>
+
+          <Link className="nav-link" to="/articles/create">Write new article</Link>
+
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">Hey Garry!
