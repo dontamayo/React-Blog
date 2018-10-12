@@ -15,7 +15,7 @@ const Navbar = () => {
     <div className="topbar-right">
       <ul className="topbar-nav nav">
         <li className="nav-item">
-          <a className="nav-link" href="index.html">Home</a>
+          <a className="nav-link" to="/">Home</a>
         </li>
         <li className="nav-item">
 
@@ -23,7 +23,7 @@ const Navbar = () => {
 
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="#">Hey Garry!
+          <a className="nav-link" href="#">Hey Don!
             <i className="fa fa-caret-down" />
           </a>
           <div className="nav-submenu">
@@ -32,7 +32,7 @@ const Navbar = () => {
           </div>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="login.html">Login</a>
+          <Link className="nav-link" to="login">Login</Link>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="register.html">Signup</a>
