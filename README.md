@@ -8,4 +8,6 @@
 4. npm i --save axios //-> for api
 5. npm i -g eslint //-> tool to help us write better code.
 * eslint --init
-<img src='./public/eslint.png' height='300px' width='300px' alt='eslint steps' />
+<img src='./public/eslint.png' height='300px' width='375px' alt='eslint steps' />
+6. npm i --save prop-types
+7. npm i --save-dev babel-eslint
