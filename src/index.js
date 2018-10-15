@@ -11,45 +11,71 @@ import SingleArticle from './components/SingleArticle';
 import Signup from './components/Signup';
 
 
-const Main = withRouter(({location})=> {
-  return (
-    <div>
+class App extends React.Component {
 
-      {
-        location.pathname !== '/login' && location.pathname !== '/signup' &&
-        <Navbar />
-      }
+  constructor() {
+    super();
+
+    this.state = {
+      authUser: null
+    };
+  }
+
+  componentDidMount() {
+    const user = localStorage.getItem('user')
+
+    if (user) {
+      this.setState({
+        authUser: JSON.parse(user)
+      })
+    }
+  }
+
+  setAuthUser = (authUser) => {
+    this.setState({
+      authUser
+    });
+  }
 
 
-      <Route exact path="/" component={Welcome}/>
-      {/*<Route path="/about" component={About}/>
-      <Route path="/home" component={Home}/>*/}
-      <Route path="/signup" component={Signup}/>
-      <Route path="/login" component={Login}/>
-      <Route path="/article/:slug" component={SingleArticle}/>
-      <Route path="/articles/create" component={CreateArticle}/>
-
+  render() {
+    const { location } = this.props;
+    return (
+      <div>
         {
           location.pathname !== '/login' && location.pathname !== '/signup' &&
-
+          <Navbar authUser={this.state.authUser} />
+        }
+        <Route exact path="/" component={Welcome} />
+        <Route path="/login" component={Login} />
+         <Route path="/signup" render={(props) => <Signup {...props} setAuthUser={this.setAuthUser} />} />
+        <Route path="/article/:slug" component={SingleArticle} />
+        <Route path="/articles/create" component={CreateArticle} />
+        {
+          location.pathname !== '/login' && location.pathname !== '/signup' &&
           <Footer />
         }
+      </div>
+    );
+  }
+}
 
 
-
-    </div>
-  )
+const Main = withRouter((props) => {
+  return (
+    <App {...props} />
+  );
 });
 
-
 ReactDOM.render(
-
   <BrowserRouter>
-
     <Main />
-
   </BrowserRouter>
-, document.getElementById('root'));
+  , document.getElementById('root'));
 
 
 serviceWorker.unregister();
+
+
+
+//import * as serviceWorker from './serviceWorker';
