@@ -32,6 +32,9 @@ class App extends React.Component {
   setAuthUser = (authUser) => {
     this.setState({
       authUser,
+    }, () => {
+      localStorage.setItem('user', JSON.stringify(authUser));
+      this.props.history.push('/');
     });
   }
 
@@ -44,7 +47,16 @@ class App extends React.Component {
           <Navbar authUser={this.state.authUser} />
         }
         <Route exact path="/" component={Welcome} />
-        <Route path="/login" component={Login} />
+        <Route
+          path="/login"
+          render={
+            props => (<Login
+              {...props}
+              setAuthUser={this.setAuthUser}
+              loginUser={this.props.authService.loginUser}
+            />)
+          }
+        />
         <Route
           path="/signup"
           render={
@@ -69,6 +81,9 @@ class App extends React.Component {
 App.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
   }).isRequired,
   authService: PropTypes.objectOf(PropTypes.func).isRequired,
 };

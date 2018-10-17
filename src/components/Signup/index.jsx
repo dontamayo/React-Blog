@@ -1,10 +1,7 @@
 import React from 'react';
-import Axios from 'axios';
-import { validateAll } from 'indicative'
+import PropTypes from 'prop-types';
 
-import config from '../../config'
-
-import SignUpForm from './SignUpForm'
+import SignUpForm from './SignUpForm';
 
 class Signup extends React.Component {
   constructor() {
@@ -15,26 +12,24 @@ class Signup extends React.Component {
       email: '',
       password: '',
       password_confirmation: '',
-      errors: {}
+      errors: {},
     };
   }
 
   handleInputChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   }
 
   handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault();
     try {
-        const user = await this.props.registerUser(this.state)
-        localStorage.setItem('user', JSON.stringify(user))
-        this.props.setAuthUser(user)
-        this.props.history.push('/');
-      } catch (errors) {
-        this.setState({ errors });
-      }
+      const user = await this.props.registerUser(this.state);
+      this.props.setAuthUser(user);
+    } catch (errors) {
+      this.setState({ errors });
+    }
   }
 
   render() {
@@ -47,5 +42,10 @@ class Signup extends React.Component {
     );
   }
 }
+
+Signup.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  setAuthUser: PropTypes.func.isRequired,
+};
 
 export default Signup;

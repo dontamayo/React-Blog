@@ -3,6 +3,8 @@ import React from 'react';
 import Banner from './../Banner';
 import Article from './../Article';
 
+
+
 const Welcome = () => ((
   <div>
 
