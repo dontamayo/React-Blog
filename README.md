@@ -11,3 +11,4 @@
 <img src='./public/eslint.png' height='300px' width='375px' alt='eslint steps' />
 6. npm i --save prop-types
 7. npm i --save-dev babel-eslint
+8. cloudinary.com //--> to stored images on the cloud
