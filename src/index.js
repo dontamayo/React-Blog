@@ -8,7 +8,6 @@ import App from './components/App';
 import AuthService from './services/auth';
 import ArticlesService from './services/articles';
 
-//import registerServiceWorker from './registerServiceWorker';
 
 const Main = withRouter(props => ((
   <App
