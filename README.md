@@ -12,3 +12,8 @@
 6. npm i --save prop-types
 7. npm i --save-dev babel-eslint
 8. cloudinary.com //--> to stored images on the cloud
+9. npm i noty --save //-> for notification alert.
+10. npm i --save react-draft-wysiwyg draft-js //-> migrating to a new editor framework instead of the static one.
+11. npm i --save draftjs-to-html
+12. npm i --save react-render-html //-> converting the html tag to readable Content
+13. npm run build

@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="col-12 col-lg-6 offset-lg-3">
         <ul className="nav nav-primary nav-hero">
           <li className="nav-item">
-            <a className="nav-link" href="index.html">Bahdcasts</a>
+            <a className="nav-link" href="index.html">DonBlog</a>
           </li>
         </ul>
       </div>

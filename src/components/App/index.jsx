@@ -8,6 +8,7 @@ import Navbar from '../Navbar';
 import Signup from '../Signup';
 import Footer from '../Footer';
 import Welcome from '../Welcome';
+import UserArticles from '../UserArticles';
 import CreateArticle from '../CreateArticle';
 import SingleArticle from '../SingleArticle';
 import RedirectIfAuth from '../RedirectIfAuth';
@@ -41,8 +42,15 @@ class App extends React.Component {
       authUser,
     }, () => {
       localStorage.setItem('user', JSON.stringify(authUser));
+      this.props.notyService.success('Successfully logged in!');
       this.props.history.push('/');
     });
+  }
+
+  removeAuthUser = () => {
+    localStorage.removeItem('user');
+    this.props.notyService.success('Successfully logged out!');
+    this.setState({ authUser: null });
   }
 
   render() {
@@ -51,7 +59,7 @@ class App extends React.Component {
       <div>
         {
           location.pathname !== '/login' && location.pathname !== '/signup' &&
-          <Navbar authUser={this.state.authUser} />
+          <Navbar authUser={this.state.authUser} removeAuthUser={this.removeAuthUser} />
         }
         <Route
           exact
@@ -86,6 +94,7 @@ class App extends React.Component {
         />
         <Route
           path="/article/:slug"
+          exact
           render={
             props => (
               <SingleArticle
@@ -103,6 +112,31 @@ class App extends React.Component {
             getArticleCategories: this.props.articlesService.getArticleCategories,
             createArticle: this.props.articlesService.createArticle,
             token: this.state.authUser ? this.state.authUser.token : null,
+            notyService: this.props.notyService,
+          }}
+          isAuthenticated={this.state.authUser !== null}
+        />
+        <Auth
+          path="/user/articles"
+          component={UserArticles}
+          props={{
+            getUserArticles: this.props.articlesService.getUserArticles,
+            setArticles: this.setArticles,
+            deleteArticle: this.props.articlesService.deleteArticle,
+            token: this.state.authUser ? this.state.authUser.token : null,
+          }}
+          isAuthenticated={this.state.authUser !== null}
+        />
+        <Auth
+          path="/article/edit/:slug"
+          component={CreateArticle}
+          props={{
+            getArticleCategories: this.props.articlesService.getArticleCategories,
+            createArticle: this.props.articlesService.createArticle,
+            token: this.state.authUser ? this.state.authUser.token : null,
+            articles: this.state.articles,
+            updateArticle: this.props.articlesService.updateArticle,
+            notyService: this.props.notyService,
           }}
           isAuthenticated={this.state.authUser !== null}
         />
@@ -124,6 +158,7 @@ App.propTypes = {
   }).isRequired,
   authService: PropTypes.objectOf(PropTypes.func).isRequired,
   articlesService: PropTypes.objectOf(PropTypes.func).isRequired,
+  notyService: PropTypes.objectOf(PropTypes.func).isRequired,
 };
 
 export default App;

@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, withRouter } from 'react-router-dom';
-import * as serviceWorker from './serviceWorker';
 
 import App from './components/App';
 
 import AuthService from './services/auth';
 import ArticlesService from './services/articles';
+import NotificationsService from './services/notifications';
+import * as serviceWorker from './serviceWorker';
 
 
 const Main = withRouter(props => ((
   <App
     authService={new AuthService()}
     articlesService={new ArticlesService()}
+    notyService={new NotificationsService()}
     {...props}
   />
 )));
@@ -23,6 +25,7 @@ ReactDOM.render(
   </BrowserRouter>
   , document.getElementById('root'),
 );
+
 
 
 serviceWorker.unregister();
